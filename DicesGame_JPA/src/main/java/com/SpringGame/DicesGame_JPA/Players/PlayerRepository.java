@@ -1,5 +1,7 @@
 package com.SpringGame.DicesGame_JPA.Players;
 
-public class PlayerRepository {
+import org.springframework.data.repository.CrudRepository;
 
+public interface PlayerRepository extends CrudRepository<Player, Integer>{
+	
 }

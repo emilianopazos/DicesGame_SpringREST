@@ -1,8 +1,7 @@
 package com.SpringGame.DicesGame_JPA.Players;
 
-
 import java.time.LocalDate;
-import java.util.Date;
+
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,11 +13,12 @@ public class Player {
 	private String playerLogName;
 	private String playerLogPass;
 	private  String playerName;
-	//private  Date playerRegDate;
+	private  String playerRegDate;
 	//Game playerGames;
 	
 	public Player() {
-		super();
+		LocalDate currentTime = LocalDate.now();
+		this.playerRegDate = currentTime.toString(); 
 	}
 	
 	public Player(String playerLogName, String playerLogPass, String playerName) {
@@ -50,15 +50,6 @@ public class Player {
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
 	}
-/*
-	public Date getPlayerRegDate() {
-		return playerRegDate;
-	}
-
-	public void setPlayerRegDate(Date playerRegDate) {
-		this.playerRegDate = playerRegDate;
-	}
-*/
 	public String getPlayerLogName() {
 		return playerLogName;
 	}
@@ -73,6 +64,14 @@ public class Player {
 
 	public void setPlayerLogPass(String playerLogPass) {
 		this.playerLogPass = playerLogPass;
+	}
+
+	public String getPlayerRegDate() {
+		return playerRegDate;
+	}
+
+	public void setPlayerRegDate(String playerRegDate) {
+		this.playerRegDate = playerRegDate;
 	}
 	
 	
