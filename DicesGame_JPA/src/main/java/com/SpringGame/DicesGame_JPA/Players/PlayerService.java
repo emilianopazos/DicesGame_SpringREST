@@ -1,5 +1,6 @@
 package com.SpringGame.DicesGame_JPA.Players;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,8 +22,8 @@ public class PlayerService {
 	///GET ALL PLAYERS
 	public List<Player> getAllPlayers() {
 		List<Player> allPlayers = new ArrayList<Player>();
-		//playerRepository.findAll().forEach(allPlayers::add);	
-		playerRepository.findAll().forEach(p -> allPlayers.add(p));
+		//playerRepository.findAll().forEach(allPlayers::add);//With method reference
+		playerRepository.findAll().forEach(p -> allPlayers.add(p));//With lambda
 		return allPlayers;
 	}
 	
@@ -31,6 +32,7 @@ public class PlayerService {
 		if(newPlayer.getPlayerName()=="") {
 			newPlayer.setPlayerName("Anonimo");
 		}
+		newPlayer.setPlayerRegDate(LocalDateTime.now().toString());		
 		playerRepository.save(newPlayer);		
 	}
 	
@@ -38,7 +40,7 @@ public class PlayerService {
 	public void updatePlayer(Player newPlayer) {
 		if(newPlayer.getPlayerName()=="") {
 			newPlayer.setPlayerName("Anonimo");
-		}
+		}		
 		playerRepository.save(newPlayer);
 	}
 

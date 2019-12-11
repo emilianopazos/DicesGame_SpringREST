@@ -19,45 +19,14 @@ public class GamesService {
 		
 	}
 
-	/*
-	 * COPY FROM GAME SERVICE. EDIT WHILE CREATE MAPPING REQUEST IN CONTROLLER
-	 * 
-	
-	//GET PLAYER BY playerId
-	public Optional<Games> getPlayerById(int playerId) {
-		return gamesRepository.findById(playerId);
-	}
-	
-	///GET ALL PLAYERS
-	public List<Games> getAllPlayers() {
-		List<Games> allPlayers = new ArrayList<Games>();
-		//playerRepository.findAll().forEach(allPlayers::add);	
-		gamesRepository.findAll().forEach(p -> allPlayers.add(p));
-		return allPlayers;
-	}
-	
-	//POST -ADD NEW PLAYER
-	public void addNewPlayer(Games newPlayer) {
-		if(newPlayer.getPlayerName()=="") {
-			newPlayer.setPlayerName("Anonimo");
-		}
-		gamesRepository.save(newPlayer);		
-	}
-	
-	//PUT or UPDATE PLAYER
-	public void updatePlayer(Games newPlayer) {
-		if(newPlayer.getPlayerName()=="") {
-			newPlayer.setPlayerName("Anonimo");
-		}
-		gamesRepository.save(newPlayer);
+	public List<Games> getAllGames(int playerId) {
+		List<Games> allGamesForPlayer = new ArrayList<>();
+		gamesRepository.findByPlayerPlayerId(playerId).forEach(allGamesForPlayer::add);
+		return allGamesForPlayer;
 	}
 
-	//DELETE PLAYER
-	public void deletePlayer(int playerId) {
-		gamesRepository.deleteById(playerId);
+	public Optional<Games> getGameByGameId(int gameId) {
+		return gamesRepository.findById(gameId);
 	}
-	*/
-	
-	
 
 }

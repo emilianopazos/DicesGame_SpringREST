@@ -1,7 +1,6 @@
 package com.SpringGame.DicesGame_JPA.Games;
 
-import java.time.Clock;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Random;
 
 import javax.persistence.Entity;
@@ -16,13 +15,11 @@ public class Games {
 	
 	@Id@GeneratedValue
 	private int gameId;
-	private String gameDate;
-	private String gameTime;
+	private String gameDateTime;
 	private int dice1;
 	private int dice2;
 	private int isWin;
 	private int playerId;
-	//Game playerGames;
 	
 	@ManyToOne
 	private Player player;//Foreign Key
@@ -33,10 +30,8 @@ public class Games {
 	}
 	
 	public Games(int playerId) {
-		LocalDate currentDate = LocalDate.now();
-		LocalDate currentTime = LocalDate.now(Clock.systemUTC());
-		this.setGameDate(currentDate.toString());
-		this.gameTime = currentTime.toString();
+		LocalDateTime currentDateTime = LocalDateTime.now();
+		this.setGameDate(currentDateTime.toString());
 		this.dice1 = new Random().nextInt(7);
 		this.dice2 = new Random().nextInt(7);
 		///Decide whether is a Win or Not
@@ -48,15 +43,38 @@ public class Games {
 			this.isWin = 0;
 		}
 		
-		//Set Id not connected
+		//Set playerId to persist in DB, for non relational porpouse
 		this.setPlayerId(playerId);
+		
 		//Set Id Foreign Key
 		Player player = new Player();
 		player.setPlayerId(playerId);
 		this.player = player;		
 	}
 	
+	public int getGameId() {
+		return gameId;
+	}
 
+	public void setGameId(int gameId) {
+		this.gameId = gameId;
+	}
+
+	public int getIsWin() {
+		return isWin;
+	}
+
+	public void setIsWin(int isWin) {
+		this.isWin = isWin;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
 
 	public int getDice1() {
 		return dice1;
@@ -77,24 +95,13 @@ public class Games {
 		this.dice2 = dice2;
 	}
 
-
-	public String getGameTime() {
-		return gameTime;
-	}
-
-
-	public void setGameTime(String gameTime) {
-		this.gameTime = gameTime;
-	}
-
-
 	public String getGameDate() {
-		return gameDate;
+		return gameDateTime;
 	}
 
 
 	public void setGameDate(String gameDate) {
-		this.gameDate = gameDate;
+		this.gameDateTime = gameDate;
 	}
 
 
