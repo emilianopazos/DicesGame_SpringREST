@@ -18,7 +18,7 @@ public class GamesService {
 		gamesRepository.save(newGame);
 		
 	}
-
+	//Change name to getAllGamesForPlayer
 	public List<Games> getAllGames(int playerId) {
 		List<Games> allGamesForPlayer = new ArrayList<>();
 		gamesRepository.findByPlayerPlayerId(playerId).forEach(allGamesForPlayer::add);
@@ -28,5 +28,14 @@ public class GamesService {
 	public Optional<Games> getGameByGameId(int gameId) {
 		return gamesRepository.findById(gameId);
 	}
+	
+	public List<Games> getEveryGames() {
+		List<Games> allGames = new ArrayList<>();
+		gamesRepository.findAll().forEach(allGames::add);
+		return allGames;
+	}
+	
+	
+	
 
 }
