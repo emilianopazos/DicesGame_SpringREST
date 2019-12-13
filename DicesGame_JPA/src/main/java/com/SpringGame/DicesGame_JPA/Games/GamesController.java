@@ -25,7 +25,7 @@ public class GamesController {
 	///GET ALL GAMES for a Player by PlayerId
 	@RequestMapping(method=RequestMethod.GET,value = "/players/{playerId}/games")//GET ALL PLAYERS
 	public List<Games> getAllGames(@PathVariable int playerId) {
-		return gamesService.getAllGames(playerId);
+		return gamesService.getAllGamesForPlayer(playerId);
 	}
 	
 	///GET GAME for a Player by GameId

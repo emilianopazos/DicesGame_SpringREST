@@ -18,24 +18,22 @@ public class GamesService {
 		gamesRepository.save(newGame);
 		
 	}
-	//Change name to getAllGamesForPlayer
-	public List<Games> getAllGames(int playerId) {
-		List<Games> allGamesForPlayer = new ArrayList<>();
-		gamesRepository.findByPlayerPlayerId(playerId).forEach(allGamesForPlayer::add);
-		return allGamesForPlayer;
-	}
-
+	
 	public Optional<Games> getGameByGameId(int gameId) {
 		return gamesRepository.findById(gameId);
 	}
 	
-	public List<Games> getEveryGames() {
+	public List<Games> getAllGames() {
 		List<Games> allGames = new ArrayList<>();
 		gamesRepository.findAll().forEach(allGames::add);
 		return allGames;
 	}
 	
-	
+	public List<Games> getAllGamesForPlayer(int playerId) {
+		List<Games> allGamesForPlayer = new ArrayList<>();
+		gamesRepository.findByPlayerPlayerId(playerId).forEach(allGamesForPlayer::add);
+		return allGamesForPlayer;
+	}
 	
 
 }
