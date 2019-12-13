@@ -16,6 +16,9 @@ public class PlayerController {
 	@Autowired
 	private PlayerService playerService;
 	
+//    @Autowired
+//    private ModelMapper modelMapper;
+	
 	///GET ALL PLAYERS
 	@RequestMapping("/players")//GET ALL PLAYERS
 	public List<Player> getAllPlayers() {
@@ -24,7 +27,7 @@ public class PlayerController {
 	
 	///GET PLAYER BY ID
 	@RequestMapping(method=RequestMethod.GET, value = "/players/{playerId}")
-	public Optional<Player> Player(@PathVariable int playerId) {
+	public Optional<Player> getPlayer(@PathVariable int playerId) {
 		return playerService.getPlayerById(playerId);
 	}
 	
@@ -46,5 +49,21 @@ public class PlayerController {
 		playerService.deletePlayer(playerId);
 	}
 	
-	
+//	//GET player by id converted to DTO
+//	@RequestMapping(method=RequestMethod.GET, value = "/players/DTO/{playerId}")
+//	public PlayerDTO getPlayerDTO(@PathVariable int playerId) {
+//		Optional<Player> requestedPlayer = playerService.getPlayerById(playerId);
+//		return 	convertToDto(requestedPlayer);
+//	}
+//	
+//	private PlayerDTO convertToDto(Optional<Player> requestedPlayer) {
+//		modelMapper.addMappings(propertyMap)
+//		PlayerDTO reqPlayerDTO = modelMapper.map(requestedPlayer, PlayerDTO.class);
+//		modelMapper.
+//		return reqPlayerDTO;
+////	    PostDto postDto = modelMapper.map(post, PostDto.class);
+////	    postDto.setSubmissionDate(post.getSubmissionDate(), 
+////	        userService.getCurrentUser().getPreference().getTimezone());
+////	    return postDto;
+////}
 }
