@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,9 +35,16 @@ public class PlayerController {
 	
 	//POST -ADD NEW PLAYER
 	@RequestMapping(method=RequestMethod.POST, value = "/players")
-	public void addNewPlayer(@RequestBody Player newPlayer) {
-		playerService.addNewPlayer(newPlayer);
+	public ResponseEntity<String> addPlayer(@RequestBody Player newPlayer){		
+		if(playerService.isNameUsed(newPlayer.getPlayerName().toLowerCase())) {
+			return new ResponseEntity<>("Sorry the name is not Available. Try A different one",HttpStatus.CONFLICT);
+		}else {
+			playerService.addNewPlayer(newPlayer);
+			return new ResponseEntity<>("Player Added Succesfully!!",HttpStatus.OK);
+		}
+		
 	}
+	
 	
 	//POST -ADD NEW PLAYER
 	@RequestMapping(method=RequestMethod.PUT, value = "/players")
@@ -47,6 +56,18 @@ public class PlayerController {
 	@RequestMapping(method=RequestMethod.DELETE, value = "/players/{playerId}")
 	public void deletePlayer(@PathVariable int playerId) {
 		playerService.deletePlayer(playerId);
+	}
+	
+	//GET Availability confirmation for a particular Name
+	@RequestMapping(method=RequestMethod.GET, value = "/players/isNameUsed/{playerName}")
+	public ResponseEntity<String> checkNameIsAvailable(@PathVariable String playerName){
+				
+		if(playerService.isNameUsed(playerName.toLowerCase())) {
+			return new ResponseEntity<>("Sorry the name is not Available. Try A different one",HttpStatus.CONFLICT);
+		}else {
+			return new ResponseEntity<>("Name available!!",HttpStatus.OK);
+		}
+		
 	}
 	
 //	//GET player by id converted to DTO

@@ -49,6 +49,15 @@ public class PlayerService {
 		playerRepository.deleteById(playerId);
 	}
 	
+	//GET Name availability 
+	public boolean isNameUsed(String playerName) {
+		List<String> usedNames = new ArrayList<String>();
+		List<Player> registeredPlayers = this.getAllPlayers();
+		for (Player player : registeredPlayers) {
+			usedNames.add(player.getPlayerName().toLowerCase());
+		}
+		return usedNames.contains(playerName);
+	}
 	
 
 }
