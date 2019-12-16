@@ -26,13 +26,13 @@ public class GamesController {
 //		    map(source.getDice1(), destination.dice1);
 //		  }
 //		};
-		
+	/*--POST--*/
 	//POST -ADD NEW GAME TO A PLAYER (by playerId)
 	@RequestMapping(method=RequestMethod.POST, value = "/players/{playerId}/games")
 	public void newGameForPlayer(@PathVariable int playerId) {
 		gamesService.addNewGameForPlayer(playerId);
 	}
-	
+	/*--GET--*/
 	///GET ALL GAMES for a Player by PlayerId
 	@RequestMapping(method=RequestMethod.GET,value = "/players/{playerId}/games")//GET ALL PLAYERS
 	public List<Games> getAllGames(@PathVariable int playerId) {
@@ -44,6 +44,7 @@ public class GamesController {
 //	public Optional<Games> getGameByGameId(@PathVariable int gameId) {
 //		return gamesService.getGameByGameId(gameId);
 //	}
+	
 	///GET GAME for a Player by GameId. With DTO conversion
 	@RequestMapping(method=RequestMethod.GET,value = "/players/{playerId}/games/{gameId}")//GET ALL PLAYERS
 	public GameDTO getGameByGameId(@PathVariable int gameId) {
@@ -57,11 +58,21 @@ public class GamesController {
 		return 	convertToDto(requestedGame);
 	}
 	
-	
-	///Conversion to DTO method()
+	////DTO-GAME CONVERSION
+	//////Conversion to DTO method()
 	private GameDTO convertToDto(Optional<Games> requestedGame) {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
 		GameDTO reqGameDTO = modelMapper.map(requestedGame.get(), GameDTO.class);
 		return reqGameDTO;
 	}
+	
+	/*--DELETE--*/
+	@RequestMapping(method=RequestMethod.DELETE, value = "/players/{playerId}/games")
+	public void deleteAllGamesForPlayer(@PathVariable int playerId) {
+		gamesService.deleteAllGamesForPlayer(playerId);
+				
+	}
+	
+	
+	
 }

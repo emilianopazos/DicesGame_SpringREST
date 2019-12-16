@@ -34,6 +34,13 @@ public class GamesService {
 		gamesRepository.findByPlayerPlayerId(playerId).forEach(allGamesForPlayer::add);
 		return allGamesForPlayer;
 	}
+
+	public void deleteAllGamesForPlayer(int playerId) {
+		List<Games> allGamesForPlayer = this.getAllGamesForPlayer(playerId);
+		for (Games games : allGamesForPlayer) {
+			gamesRepository.deleteById(games.getGameId());
+		}		
+	}
 	
 
 }
