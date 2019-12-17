@@ -14,7 +14,14 @@ public class Statics {
 		super();
 		this.qtGames = qtGames;
 		this.qtIsWin = qtIsWin;
-		this.avgIsWin = this.getQtIsWin() / this.getQtGames();
+		if(qtGames != 0) {
+			this.avgIsWin = this.getQtIsWin() / this.getQtGames();
+		}else {
+			this.avgIsWin = (float) 0.0;
+		}
+		
+		
+		//this.avgIsWin = (float) 0.2;
 	}
 	public int getQtGames() {
 		return qtGames;

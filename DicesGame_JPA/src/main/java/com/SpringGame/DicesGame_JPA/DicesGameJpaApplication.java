@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.SpringGame.DicesGame_JPA.Statics.StaticsService;
+
 @SpringBootApplication
 public class DicesGameJpaApplication {
 
@@ -16,4 +18,10 @@ public class DicesGameJpaApplication {
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
+    
+    @Bean
+    public StaticsService StaticsService() {
+        return new StaticsService();
+    }
+    
 }
