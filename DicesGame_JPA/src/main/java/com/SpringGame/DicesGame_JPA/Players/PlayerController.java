@@ -2,8 +2,6 @@ package com.SpringGame.DicesGame_JPA.Players;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,28 +26,8 @@ public class PlayerController {
 	@Autowired
 	private StaticsService staticsService;
 	
-	///GET ALL PLAYERS
-	@RequestMapping("/players")//GET ALL PLAYERS
-	public List<PlayerDTO> getAllPlayers() {
-		//Get All players in a List, and calculate their Stats
-		List<Player> allPlayers = playerService.getAllPlayers();
-		allPlayers.forEach(player -> player.setAvgIsWin(staticsService.getStatics(gamesService.getAllGamesForPlayer(player.getPlayerId())).getAvgIsWin()));
-		//Create List of DTO, and populate with objectos converted to DTOs
-		List<PlayerDTO> allPlayersDTO = new ArrayList<>();
-		allPlayers.forEach(player -> allPlayersDTO.add(new PlayerDTO(player)));
-		return allPlayersDTO;
-	}
 	
-	///GET PLAYER BY ID
-	@RequestMapping(method=RequestMethod.GET, value = "/players/{playerId}")
-	public PlayerDTO getPlayer(@PathVariable int playerId) {
-		//Get a Player by PlayerId
-		Player requestedPlayer = playerService.getPlayerById(playerId).get(); 
-		//Calculate Stats
-		requestedPlayer.setAvgIsWin(staticsService.getStatics(gamesService.getAllGamesForPlayer(playerId)).getAvgIsWin());
-		return new PlayerDTO(requestedPlayer);
-	}
-	
+	/*--POST REQUESTs--*/
 	//POST -ADD NEW PLAYER
 	@RequestMapping(method=RequestMethod.POST, value = "/players")
 	public ResponseEntity<String> addPlayer(@RequestBody Player newPlayer){		
@@ -62,13 +40,38 @@ public class PlayerController {
 		
 	}
 	
+	/*--GET REQUESTs--*/
+	///GET ALL PLAYERS
+	@RequestMapping("/players")//GET ALL PLAYERS
+	public List<PlayerDTO> getAllPlayers() {
+		//Get All players in a List, and calculate their Stats
+		List<Player> allPlayers = playerService.getAllPlayers();
+		allPlayers.forEach(player -> player.setAvgIsWin(staticsService.getStatics(gamesService.getAllGamesForPlayer(player.getPlayerId())).getAvgIsWin()));
+		//Create List of DTO, and populate with objectos converted to DTOs
+		List<PlayerDTO> allPlayersDTO = new ArrayList<>();
+		allPlayers.forEach(player -> allPlayersDTO.add(new PlayerDTO(player)));
+		return allPlayersDTO;
+	}
+	///GET PLAYER BY ID
+	@RequestMapping(method=RequestMethod.GET, value = "/players/{playerId}")
+	public PlayerDTO getPlayer(@PathVariable int playerId) {
+		//Get a Player by PlayerId
+		Player requestedPlayer = playerService.getPlayerById(playerId).get(); 
+		//Calculate Stats
+		requestedPlayer.setAvgIsWin(staticsService.getStatics(gamesService.getAllGamesForPlayer(playerId)).getAvgIsWin());
+		return new PlayerDTO(requestedPlayer);
+	}
 	
-	//POST -ADD NEW PLAYER
+	
+	/*--PUT REQUESTs--*/
+	//PUT -ADD NEW PLAYER
 	@RequestMapping(method=RequestMethod.PUT, value = "/players")
 	public void updatePlayer(@RequestBody Player newPlayer) {		
 		playerService.updatePlayer(newPlayer);
 	}
 	
+	
+	/*--DELETE REQUESTs--*/
 	//DELETE PLAYER
 	@RequestMapping(method=RequestMethod.DELETE, value = "/players/{playerId}")
 	public void deletePlayer(@PathVariable int playerId) {
@@ -76,6 +79,10 @@ public class PlayerController {
 		playerService.deletePlayer(playerId);
 	}
 	
+	
+	
+	
+	/*--EXTRA REQUESTs (Developing process)--*/
 	//GET Availability confirmation for a particular Name
 	@RequestMapping(method=RequestMethod.GET, value = "/players/isNameUsed/{playerName}")
 	public ResponseEntity<String> checkNameIsAvailable(@PathVariable String playerName){
@@ -87,7 +94,6 @@ public class PlayerController {
 		}
 		
 	}
-	
 	//GET player by id converted to DTO
 	@RequestMapping(method=RequestMethod.GET, value = "/players/DTO/{playerId}")
 	public PlayerDTO getPlayerDTO(@PathVariable int playerId) {
@@ -99,7 +105,6 @@ public class PlayerController {
 		PlayerDTO requestedPlayerDTO = new PlayerDTO(requestedPlayer);
 		return 	requestedPlayerDTO;
 	}
-	
 	//GET ALL players DTO format
 	@RequestMapping(method=RequestMethod.GET, value = "/players/DTO")
 	public List<PlayerDTO> getAllPlayerDTO() {

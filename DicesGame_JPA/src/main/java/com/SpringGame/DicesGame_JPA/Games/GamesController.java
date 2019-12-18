@@ -43,13 +43,6 @@ public class GamesController {
 		return convertToDto(gamesService.getGameByGameId(gameId).get());
 	}
 	
-	//GET game by GameId converted to GameDTO (include only playerId) Special mapping for DTO, used while generating DTO transformation
-	@RequestMapping(method=RequestMethod.GET, value = "/players/{playerId}/games/DTO/{gameId}")
-	public GameDTO getPlayerDTO(@PathVariable int gameId) {
-		Optional<Games> requestedGame = gamesService.getGameByGameId(gameId);
-		return 	convertToDto(requestedGame.get());
-	}
-	
 	
 	/*--DELETE--*/
 	@RequestMapping(method=RequestMethod.DELETE, value = "/players/{playerId}/games")
@@ -59,7 +52,6 @@ public class GamesController {
 	}
 	
 	
-
 	////DTO-GAME CONVERSION
 	//////Conversion to DTO method()
 	private GameDTO convertToDto(Games requestedGame) {
@@ -67,4 +59,14 @@ public class GamesController {
 		GameDTO reqGameDTO = modelMapper.map(requestedGame, GameDTO.class);
 		return reqGameDTO;
 	}
+	
+	
+	/*--EXTRA REQUESTs (Developing process)--*/
+	//GET game by GameId converted to GameDTO (include only playerId) Special mapping for DTO, used while generating DTO transformation
+	@RequestMapping(method=RequestMethod.GET, value = "/players/{playerId}/games/DTO/{gameId}")
+	public GameDTO getPlayerDTO(@PathVariable int gameId) {
+		Optional<Games> requestedGame = gamesService.getGameByGameId(gameId);
+		return 	convertToDto(requestedGame.get());
+	}
+	
 }

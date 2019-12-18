@@ -13,7 +13,7 @@ public class PlayerService {
 	
 	@Autowired
 	private PlayerRepository playerRepository;
-
+	
 	//GET PLAYER BY playerId
 	public Optional<Player> getPlayerById(int playerId) {
 		return playerRepository.findById(playerId);
@@ -43,7 +43,7 @@ public class PlayerService {
 		}		
 		playerRepository.save(newPlayer);
 	}
-
+	
 	//DELETE PLAYER
 	public void deletePlayer(int playerId) {
 		playerRepository.deleteById(playerId);
@@ -58,6 +58,5 @@ public class PlayerService {
 		}
 		return usedNames.contains(playerName);
 	}
-	
 
 }
