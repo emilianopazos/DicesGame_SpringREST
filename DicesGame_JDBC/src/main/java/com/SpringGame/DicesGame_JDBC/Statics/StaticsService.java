@@ -2,8 +2,11 @@ package com.SpringGame.DicesGame_JDBC.Statics;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.SpringGame.DicesGame_JDBC.Games.Games;
 
+@Service
 public class StaticsService {
 	
 	//GET STATIC FOR A PLAYER BY PlayerId

@@ -31,7 +31,7 @@ public class GamesService {
 	
 	public List<Games> getAllGamesForPlayer(int playerId) {
 		List<Games> allGamesForPlayer = new ArrayList<>();
-		gamesRepository.findByPlayerPlayerId(playerId).forEach(allGamesForPlayer::add);
+		//gamesRepository.findByPlayerPlayerId(playerId).forEach(allGamesForPlayer::add);
 		return allGamesForPlayer;
 	}
 

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +14,9 @@ public class PlayerService {
 	
 	@Autowired
 	private PlayerRepository playerRepository;
+	
+	@Autowired
+	JdbcTemplate jdbcTemplate;
 	
 	//GET PLAYER BY playerId
 	public Optional<Player> getPlayerById(int playerId) {
@@ -57,6 +61,17 @@ public class PlayerService {
 			usedNames.add(player.getPlayerName().toLowerCase());
 		}
 		return usedNames.contains(playerName);
+	}
+
+	public void createTablePlayer() {
+		this.jdbcTemplate.execute("CREATE TABLE `player` (\r\n" + 
+				"  `player_id` int(11) NOT NULL,\r\n" + 
+				"  `player_log_name` varchar(255) DEFAULT NULL,\r\n" + 
+				"  `player_log_pass` varchar(255) DEFAULT NULL,\r\n" + 
+				"  `player_name` varchar(255) DEFAULT NULL,\r\n" + 
+				"  `player_reg_date` varchar(255) DEFAULT NULL,\r\n" + 
+				"  PRIMARY KEY (`player_id`)\r\n" + 
+				") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci");
 	}
 
 }

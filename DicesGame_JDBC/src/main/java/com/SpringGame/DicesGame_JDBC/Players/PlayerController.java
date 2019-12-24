@@ -94,28 +94,12 @@ public class PlayerController {
 		}
 		
 	}
-	//GET player by id converted to DTO
-	@RequestMapping(method=RequestMethod.GET, value = "/players/DTO/{playerId}")
-	public PlayerDTO getPlayerDTO(@PathVariable int playerId) {
-		//Get PlayerFromRepo
-		Player requestedPlayer = playerService.getPlayerById(playerId).get();
-		//Calculate Stats and set avgIsWin in Player
-		requestedPlayer.setAvgIsWin(staticsService.getStatics(gamesService.getAllGamesForPlayer(playerId)).getAvgIsWin());
-		//Convert to PlayerDTO
-		PlayerDTO requestedPlayerDTO = new PlayerDTO(requestedPlayer);
-		return 	requestedPlayerDTO;
-	}
-	//GET ALL players DTO format
-	@RequestMapping(method=RequestMethod.GET, value = "/players/DTO")
-	public List<PlayerDTO> getAllPlayerDTO() {
-		//Get All players in a List, and calculate their Stats
-		List<Player> allPlayers = playerService.getAllPlayers();
-		allPlayers.forEach(player -> player.setAvgIsWin(staticsService.getStatics(gamesService.getAllGamesForPlayer(player.getPlayerId())).getAvgIsWin()));
-		//Create a List of DTO Objects and populate with objects converted to objectDTO
-		List<PlayerDTO> allPlayersDTO = new ArrayList<>();
-		allPlayers.forEach(player -> allPlayersDTO.add(new PlayerDTO(player)));
-		///Return List with DTOs
-		return 	allPlayersDTO;
+
+	//EXTRA REQUEST FOR DEVELOPING PORPOUSE
+	//POST for creatTables
+	@RequestMapping(method=RequestMethod.POST, value = "/players/createTables")
+	public void createPlayerTable() {
+		playerService.createTablePlayer();
 	}
 	
 }
