@@ -3,17 +3,10 @@ package com.SpringGame.DicesGame_JDBC.Games;
 import java.time.LocalDateTime;
 import java.util.Random;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import com.SpringGame.DicesGame_JDBC.Players.Player;
 
-@Entity
 public class Games {
-	
-	@Id@GeneratedValue
 	private int gameId;
 	private String gameDateTime;
 	private int dice1;
@@ -21,7 +14,6 @@ public class Games {
 	private int isWin;
 	private int playerId;
 	
-	@ManyToOne
 	private Player player;//Foreign Key
 	
 	

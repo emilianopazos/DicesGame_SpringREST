@@ -1,20 +1,12 @@
 package com.SpringGame.DicesGame_JDBC.Players;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
-
-@Entity
 public class Player {
-	@Id@GeneratedValue
 	private int playerId;
 	private String playerLogName;
 	private String playerLogPass;
 	private String playerName;
 	private String playerRegDate;
 	//Game playerGames;
-	@Transient
 	private float playerWinStats = (float) 0.00;
 	
 	public Player() {
