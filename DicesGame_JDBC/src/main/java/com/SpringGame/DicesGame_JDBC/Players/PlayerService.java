@@ -19,8 +19,8 @@ public class PlayerService {
 	JdbcTemplate jdbcTemplate;
 	
 	//GET PLAYER BY playerId
-	public Optional<Player> getPlayerById(int playerId) {
-		return playerRepository.findById(playerId);
+	public Player getPlayerById(int playerId) {
+		return playerRepository.findById(playerId).get();
 	}
 	
 	///GET ALL PLAYERS
@@ -37,7 +37,8 @@ public class PlayerService {
 			newPlayer.setPlayerName("Anonimo");
 		}
 		newPlayer.setPlayerRegDate(LocalDateTime.now().toString());		
-		playerRepository.save(newPlayer);		
+		playerRepository.save(newPlayer);
+		//jdbcTemplate.execute(sql);
 	}
 	
 	//PUT or UPDATE PLAYER
@@ -65,7 +66,7 @@ public class PlayerService {
 
 	public void createTablePlayer() {
 		this.jdbcTemplate.execute("CREATE TABLE `player` (\r\n" + 
-				"  `player_id` int(11) NOT NULL,\r\n" + 
+				"  `player_id` int(11) NOT NULL AUTO_INCREMENT,\r\n" + 
 				"  `player_log_name` varchar(255) DEFAULT NULL,\r\n" + 
 				"  `player_log_pass` varchar(255) DEFAULT NULL,\r\n" + 
 				"  `player_name` varchar(255) DEFAULT NULL,\r\n" + 

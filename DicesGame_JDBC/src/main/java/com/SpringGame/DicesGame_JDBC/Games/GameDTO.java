@@ -9,6 +9,8 @@ public class GameDTO {
 	private int playerId;
 	private String playerLogName;///With this name, the mapper search into linked player attributes (player object linked with each game by FK playerId)
 	
+	
+	
 	public GameDTO(Games reqGame) {
 		super();
 		this.gameId = reqGame.getGameId();
@@ -17,7 +19,11 @@ public class GameDTO {
 		this.dice2 = reqGame.getDice2();
 		this.isWin = reqGame.getIsWin();
 		this.playerId = reqGame.getPlayerId();
-		this.playerLogName = reqGame.getPlayer().getPlayerLogName();
+		
+		//Quitado porque ahora los games solo guardan los player id
+//		this.playerLogName = reqGame.getPlayer().getPlayerLogName();
+		this.playerLogName = null;
+		
 	}
 	public int getGameId() {
 		return gameId;

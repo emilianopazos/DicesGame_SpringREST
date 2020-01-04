@@ -10,7 +10,7 @@ mysql> grant all on db_example.* to 'springuser'@'%'; -- Gives all privileges to
 
 --Create table player
 CREATE TABLE `player` (
-  `player_id` int(11) NOT NULL,
+  `player_id` int(11) NOT NULL AUTO_INCREMENT,
   `player_log_name` varchar(255) DEFAULT NULL,
   `player_log_pass` varchar(255) DEFAULT NULL,
   `player_name` varchar(255) DEFAULT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE `player` (
 
 -- Create table games
 CREATE TABLE `games` (
-  `game_id` int(11) NOT NULL,
+  `game_id` int(11) NOT NULL AUTO_INCREMENT,
   `dice1` int(11) NOT NULL,
   `dice2` int(11) NOT NULL,
   `game_date_time` varchar(255) DEFAULT NULL,
@@ -73,6 +73,8 @@ SELECT `player`.`player_id`,
     `player`.`player_name`,
     `player`.`player_reg_date`
 FROM `db_dicesgame`.`player`;
+
+--DELETE player (delete linked games)
 
 
 

@@ -5,7 +5,7 @@ public class PlayerDTO {
 	private String playerLogName;
 	private String playerName;
 	private String playerRegDate;
-	private float playerWinStats = (float) 0.00;
+//	private float playerWinStats = (float) 0.00;
 	
 	public PlayerDTO() {
 		
@@ -16,7 +16,7 @@ public class PlayerDTO {
 		this.playerLogName = player.getPlayerLogName();
 		this.playerName = player.getPlayerName();
 		this.playerRegDate = player.getPlayerRegDate();
-		this.playerWinStats = player.getAvgIsWin();
+//		this.playerWinStats = player.getAvgIsWin();
 	}
 	
 	
@@ -46,13 +46,13 @@ public class PlayerDTO {
 		this.playerRegDate = playerRegDate;
 	}
 
-	public float getPlayerWinStats() {
-		return playerWinStats;
-	}
-
-	public void setPlayerWinStats(float playerWinStats) {
-		this.playerWinStats = playerWinStats;
-	}
+//	public float getPlayerWinStats() {
+//		return playerWinStats;
+//	}
+//
+//	public void setPlayerWinStats(float playerWinStats) {
+//		this.playerWinStats = playerWinStats;
+//	}
 
 
 }

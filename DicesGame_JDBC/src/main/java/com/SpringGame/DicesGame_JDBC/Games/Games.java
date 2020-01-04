@@ -2,20 +2,27 @@ package com.SpringGame.DicesGame_JDBC.Games;
 
 import java.time.LocalDateTime;
 import java.util.Random;
+import java.util.Set;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 
 import com.SpringGame.DicesGame_JDBC.Players.Player;
 
 public class Games {
+	
+	@Id
 	private int gameId;
 	private String gameDateTime;
 	private int dice1;
 	private int dice2;
 	private int isWin;
+	
+//	@MappedCollection(idColumn = "playerId")
+//	Set<Player> playerId;
+	
+//	private Player player;//Foreign Key
 	private int playerId;
-	
-	private Player player;//Foreign Key
-	
 	
 	public Games() {
 					
@@ -39,9 +46,9 @@ public class Games {
 		this.setPlayerId(playerId);
 		
 		//Set Id Foreign Key
-		Player player = new Player();
-		player.setPlayerId(playerId);
-		this.player = player;		
+//		Player player = new Player();
+//		player.setPlayerId(playerId);
+//		this.player = player;		
 	}
 	
 	public int getGameId() {
@@ -60,13 +67,13 @@ public class Games {
 		this.isWin = isWin;
 	}
 
-	public Player getPlayer() {
-		return player;
-	}
-
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
+//	public Player getPlayer() {
+//		return player;
+//	}
+//
+//	public void setPlayer(Player player) {
+//		this.player = player;
+//	}
 
 	public int getDice1() {
 		return dice1;
@@ -114,7 +121,7 @@ public class Games {
 		this.playerId = playerId;
 	}
 	
-	
+
 	
 
 }

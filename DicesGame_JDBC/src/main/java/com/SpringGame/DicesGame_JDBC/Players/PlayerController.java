@@ -46,7 +46,7 @@ public class PlayerController {
 	public List<PlayerDTO> getAllPlayers() {
 		//Get All players in a List, and calculate their Stats
 		List<Player> allPlayers = playerService.getAllPlayers();
-		allPlayers.forEach(player -> player.setAvgIsWin(staticsService.getStatics(gamesService.getAllGamesForPlayer(player.getPlayerId())).getAvgIsWin()));
+		//allPlayers.forEach(player -> player.setAvgIsWin(staticsService.getStatics(gamesService.getAllGamesForPlayer(player.getPlayerId())).getAvgIsWin()));
 		//Create List of DTO, and populate with objectos converted to DTOs
 		List<PlayerDTO> allPlayersDTO = new ArrayList<>();
 		allPlayers.forEach(player -> allPlayersDTO.add(new PlayerDTO(player)));
@@ -56,15 +56,15 @@ public class PlayerController {
 	@RequestMapping(method=RequestMethod.GET, value = "/players/{playerId}")
 	public PlayerDTO getPlayer(@PathVariable int playerId) {
 		//Get a Player by PlayerId
-		Player requestedPlayer = playerService.getPlayerById(playerId).get(); 
+		Player requestedPlayer = playerService.getPlayerById(playerId); 
 		//Calculate Stats
-		requestedPlayer.setAvgIsWin(staticsService.getStatics(gamesService.getAllGamesForPlayer(playerId)).getAvgIsWin());
+		//requestedPlayer.setAvgIsWin(staticsService.getStatics(gamesService.getAllGamesForPlayer(playerId)).getAvgIsWin());
 		return new PlayerDTO(requestedPlayer);
 	}
 	
 	
 	/*--PUT REQUESTs--*/
-	//PUT -ADD NEW PLAYER
+	//PUT -UPDATE PLAYER
 	@RequestMapping(method=RequestMethod.PUT, value = "/players")
 	public void updatePlayer(@RequestBody Player newPlayer) {		
 		playerService.updatePlayer(newPlayer);
