@@ -3,8 +3,6 @@ package com.SpringGame.DicesGame_JDBC.Players;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -42,11 +40,13 @@ public class PlayerService {
 	}
 	
 	//PUT or UPDATE PLAYER
-	public void updatePlayer(Player newPlayer) {
-		if(newPlayer.getPlayerName()=="") {
-			newPlayer.setPlayerName("Anonimo");
-		}		
-		playerRepository.save(newPlayer);
+	public void updatePlayer(Player updatePlayer) {
+		if(updatePlayer.getPlayerName()=="") {
+			updatePlayer.setPlayerName("Anonimo");
+		}
+		//Set regDate to updatePlayer based on the original registered on to maintain the original 
+		updatePlayer.setPlayerRegDate(playerRepository.findById(updatePlayer.getPlayerId()).get().getPlayerRegDate());
+		playerRepository.save(updatePlayer);
 	}
 	
 	//DELETE PLAYER

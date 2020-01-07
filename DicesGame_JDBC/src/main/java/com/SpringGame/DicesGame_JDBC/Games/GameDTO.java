@@ -14,7 +14,7 @@ public class GameDTO {
 	public GameDTO(Games reqGame) {
 		super();
 		this.gameId = reqGame.getGameId();
-		this.gameDateTime = reqGame.getGameDate();
+		this.gameDateTime = reqGame.getGameDateTime();
 		this.dice1 = reqGame.getDice1();
 		this.dice2 = reqGame.getDice2();
 		this.isWin = reqGame.getIsWin();

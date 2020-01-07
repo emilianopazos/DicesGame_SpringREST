@@ -7,6 +7,7 @@ import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @SpringBootApplication
+@EnableJdbcRepositories
 public class DicesGameJdbcApplication {
 
 	public static void main(String[] args) {
@@ -17,7 +18,4 @@ public class DicesGameJdbcApplication {
 	JdbcTemplate jdbcTemplate;
 	
 	
-	
-
-
 }

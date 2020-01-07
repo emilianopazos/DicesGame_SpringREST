@@ -36,9 +36,9 @@ public class StaticsController {
 	//GET Statics for one player by playerId
 	@RequestMapping(method=RequestMethod.GET,value = "/players/{playerId}/statics")//GET STATICS FROM ALL PLAYERS
 	public Statics getStaticsForPlayerById(@PathVariable int playerId) {
-		List<Games> allGamesForPlayer = gamesService.getAllGamesForPlayer(playerId);
-		return staticsService.getStatics(allGamesForPlayer);
-		
+//		List<Games> allGamesForPlayer = gamesService.getAllGamesForPlayer(playerId);
+//		return staticsService.getStatics(allGamesForPlayer);
+		return null;
 	}
 	
 	//GET Best Player Statics

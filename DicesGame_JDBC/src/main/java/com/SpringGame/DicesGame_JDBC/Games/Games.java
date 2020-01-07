@@ -2,12 +2,8 @@ package com.SpringGame.DicesGame_JDBC.Games;
 
 import java.time.LocalDateTime;
 import java.util.Random;
-import java.util.Set;
-
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.MappedCollection;
-
-import com.SpringGame.DicesGame_JDBC.Players.Player;
+import org.springframework.data.annotation.PersistenceConstructor;
 
 public class Games {
 	
@@ -27,10 +23,10 @@ public class Games {
 	public Games() {
 					
 	}
-	
+	@PersistenceConstructor
 	public Games(int playerId) {
 		LocalDateTime currentDateTime = LocalDateTime.now();
-		this.setGameDate(currentDateTime.toString());
+		this.setGameDateTime(currentDateTime.toString());
 		this.dice1 = new Random().nextInt(7);
 		this.dice2 = new Random().nextInt(7);
 		///Decide whether is a Win or Not
@@ -94,24 +90,14 @@ public class Games {
 		this.dice2 = dice2;
 	}
 
-	public String getGameDate() {
+	public String getGameDateTime() {
 		return gameDateTime;
 	}
 
-
-	public void setGameDate(String gameDate) {
-		this.gameDateTime = gameDate;
+	public void setGameDateTime(String gameDateTime) {
+		this.gameDateTime = gameDateTime;
 	}
 
-
-	public int isWin() {
-		return isWin;
-	}
-
-
-	public void setWin(int isWin) {
-		this.isWin = isWin;
-	}
 
 	public int getPlayerId() {
 		return playerId;

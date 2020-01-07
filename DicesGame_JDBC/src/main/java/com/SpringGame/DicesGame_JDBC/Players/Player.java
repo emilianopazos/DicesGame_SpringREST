@@ -1,6 +1,7 @@
 package com.SpringGame.DicesGame_JDBC.Players;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.Transient;
 
 public class Player {
@@ -18,6 +19,7 @@ public class Player {
 //	}
 //	
 	//Providing an all arguments constructor for jdbcRepository to use it
+	@PersistenceConstructor
 	public Player(int playerId, String playerLogName, String playerLogPass, String playerName, String playerRegDate) {
 //		super();
 		this.playerId = playerId;
@@ -29,6 +31,11 @@ public class Player {
 	}
 	
 	
+	public Player() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public int getPlayerId() {
 		return playerId;
 	}
