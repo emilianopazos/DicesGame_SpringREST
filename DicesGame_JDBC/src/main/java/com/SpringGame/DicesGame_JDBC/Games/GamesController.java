@@ -1,9 +1,6 @@
 package com.SpringGame.DicesGame_JDBC.Games;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,49 +13,48 @@ public class GamesController {
 	@Autowired
 	private GamesService gamesService;
 	
-
-	/*--POST--*/
+	/////////////////////
+	/*--POST REQUESTs--*/
+	/////////////////////
 	//POST -ADD NEW GAME TO A PLAYER (by playerId)
 	@RequestMapping(method=RequestMethod.POST, value = "/players/{playerId}/games")
 	public void newGameForPlayer(@PathVariable int playerId) {
 		gamesService.addNewGameForPlayer(playerId);
 	}
 	
-	/*--GET--*/
+	////////////////////
+	/*--GET REQUESTs--*/
+	////////////////////
 	///GET ALL GAMES for a Player by PlayerId
-//	@RequestMapping(method=RequestMethod.GET,value = "/players/{playerId}/games")//GET ALL PLAYERS
-//	public List<GameDTO> getAllGames(@PathVariable int playerId) {
-//		List<GameDTO> allGamesDTO = new ArrayList<>();
-//		gamesService.getAllGamesForPlayer(playerId).forEach(game -> allGamesDTO.add(new GameDTO(game)));
-//		return allGamesDTO;
-//	}
-	
-	@RequestMapping(method=RequestMethod.GET,value = "/players/{playerId}/games")//GET ALL PLAYERS
+	@RequestMapping(method=RequestMethod.GET,value = "/players/{playerId}/games")
 	public List<Games> getAllGames(@PathVariable int playerId) {
-		//System.out.println("Hola");
-		//List<Games> allGamesForPlayer = new ArrayList<>();
-		//gamesService.getAllGamesForPlayer(playerId).forEach(game -> allGamesDTO.add(new GameDTO(game)));
-		//gamesService.getAllGamesForPlayer(playerId).forEach(game -> allGamesForPlayer.add((Games) game));
-		//return allGamesForPlayer;
-		//System.out.println(gamesService.getAllGamesForPlayer(playerId));
-		
 		return gamesService.getAllGamesForPlayer(playerId);
 	}
+	///GET ONE GAME for a Player by GameId and playerId (check if player owns that game before return)	
+	@RequestMapping(method=RequestMethod.GET,value = "/players/{playerId}/games/{gameId}")
+	public Games getGameByGameId(@PathVariable int gameId, @PathVariable int playerId) {
+		Games reqGame = gamesService.getGameByGameId(gameId).get();
+		if(reqGame.getPlayerId() == playerId) {
+			return gamesService.getGameByGameId(gameId).get();
+		}else {
+			return null;
+		}
 		
-	///GET GAME for a Player by GameId. With DTO conversion
-	@RequestMapping(method=RequestMethod.GET,value = "/players/{playerId}/games/{gameId}")//GET ALL PLAYERS
-	public GameDTO getGameByGameId(@PathVariable int gameId) {
-		return new GameDTO(gamesService.getGameByGameId(gameId).get());
 	}
-	
-	
-	/*--DELETE--*/
-	@RequestMapping(method=RequestMethod.DELETE, value = "/players/{playerId}/games")
-	public void deleteAllGamesForPlayer(@PathVariable int playerId) {
-		gamesService.deleteAllGamesForPlayer(playerId);
-				
-	}
-	
+
+	///////////////////////
+	/*--DELETE REQUESTs--*/
+	///////////////////////
+//	//DELETE ALL GAMES FOR PLAYER //Not needed in JDBC, Cascade property in table DDL does it automatically when deletieng a player
+//	@RequestMapping(method=RequestMethod.DELETE, value = "/players/{playerId}/games")
+//	public void deleteAllGamesForPlayer(@PathVariable int playerId) {
+//		gamesService.deleteAllGamesForPlayer(playerId);
+//				
+//	}
+//	
+	////////////////////
+	/*--EXTRA REQUESTs (Developing process)--*/
+	////////////////////
 	/*--CREATE GAME TABLE--*/
 	@RequestMapping(method=RequestMethod.POST, value = "/games/createTables")
 	public void createGameTable() {

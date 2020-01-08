@@ -16,12 +16,12 @@ public class PlayerService {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
-	//GET PLAYER BY playerId
+	//GET PLAYER BY playerId//
 	public Player getPlayerById(int playerId) {
 		return playerRepository.findById(playerId).get();
 	}
 	
-	///GET ALL PLAYERS
+	///GET ALL PLAYERS///
 	public List<Player> getAllPlayers() {
 		List<Player> allPlayers = new ArrayList<Player>();
 		//playerRepository.findAll().forEach(allPlayers::add);//With method reference
@@ -29,17 +29,16 @@ public class PlayerService {
 		return allPlayers;
 	}
 	
-	//POST -ADD NEW PLAYER
+	//POST -ADD NEW PLAYER//
 	public void addNewPlayer(Player newPlayer) {
 		if(newPlayer.getPlayerName()=="") {
 			newPlayer.setPlayerName("Anonimo");
 		}
 		newPlayer.setPlayerRegDate(LocalDateTime.now().toString());		
 		playerRepository.save(newPlayer);
-		//jdbcTemplate.execute(sql);
 	}
 	
-	//PUT or UPDATE PLAYER
+	//PUT or UPDATE PLAYER//
 	public void updatePlayer(Player updatePlayer) {
 		if(updatePlayer.getPlayerName()=="") {
 			updatePlayer.setPlayerName("Anonimo");
@@ -49,12 +48,12 @@ public class PlayerService {
 		playerRepository.save(updatePlayer);
 	}
 	
-	//DELETE PLAYER
+	//DELETE PLAYER//
 	public void deletePlayer(int playerId) {
 		playerRepository.deleteById(playerId);
 	}
 	
-	//GET Name availability 
+	//GET Name availability// 
 	public boolean isNameUsed(String playerName) {
 		List<String> usedNames = new ArrayList<String>();
 		List<Player> registeredPlayers = this.getAllPlayers();
@@ -63,7 +62,8 @@ public class PlayerService {
 		}
 		return usedNames.contains(playerName);
 	}
-
+	
+	//Method for table creation. Used during developing and testing JDBC version
 	public void createTablePlayer() {
 		this.jdbcTemplate.execute("CREATE TABLE `player` (\r\n" + 
 				"  `player_id` int(11) NOT NULL AUTO_INCREMENT,\r\n" + 

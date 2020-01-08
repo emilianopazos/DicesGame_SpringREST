@@ -26,8 +26,9 @@ public class PlayerController {
 	@Autowired
 	private StaticsService staticsService;
 	
-	
+	////////////////////
 	/*--POST REQUESTs--*/
+	////////////////////
 	//POST -ADD NEW PLAYER
 	@RequestMapping(method=RequestMethod.POST, value = "/players")
 	public ResponseEntity<String> addPlayer(@RequestBody Player newPlayer){		
@@ -39,14 +40,15 @@ public class PlayerController {
 		}
 		
 	}
-	
+	////////////////////
 	/*--GET REQUESTs--*/
+	////////////////////
 	///GET ALL PLAYERS
 	@RequestMapping("/players")//GET ALL PLAYERS
 	public List<PlayerDTO> getAllPlayers() {
 		//Get All players in a List, and calculate their Stats
 		List<Player> allPlayers = playerService.getAllPlayers();
-		//allPlayers.forEach(player -> player.setAvgIsWin(staticsService.getStatics(gamesService.getAllGamesForPlayer(player.getPlayerId())).getAvgIsWin()));
+		allPlayers.forEach(player -> player.setAvgIsWin(staticsService.getStatics(gamesService.getAllGamesForPlayer(player.getPlayerId())).getAvgIsWin()));
 		//Create List of DTO, and populate with objectos converted to DTOs
 		List<PlayerDTO> allPlayersDTO = new ArrayList<>();
 		allPlayers.forEach(player -> allPlayersDTO.add(new PlayerDTO(player)));
@@ -58,31 +60,34 @@ public class PlayerController {
 		//Get a Player by PlayerId
 		Player requestedPlayer = playerService.getPlayerById(playerId); 
 		//Calculate Stats
-		//requestedPlayer.setAvgIsWin(staticsService.getStatics(gamesService.getAllGamesForPlayer(playerId)).getAvgIsWin());
+		requestedPlayer.setAvgIsWin(staticsService.getStatics(gamesService.getAllGamesForPlayer(playerId)).getAvgIsWin());
 		return new PlayerDTO(requestedPlayer);
 	}
 	
-	
+	////////////////////	
 	/*--PUT REQUESTs--*/
+	////////////////////
 	//PUT -UPDATE PLAYER
 	@RequestMapping(method=RequestMethod.PUT, value = "/players")
 	public void updatePlayer(@RequestBody Player newPlayer) {		
 		playerService.updatePlayer(newPlayer);
 	}
 	
-	
+	///////////////////////
 	/*--DELETE REQUESTs--*/
+	///////////////////////
 	//DELETE PLAYER
 	@RequestMapping(method=RequestMethod.DELETE, value = "/players/{playerId}")
 	public void deletePlayer(@PathVariable int playerId) {
-		gamesService.deleteAllGamesForPlayer(playerId);
+		//Next is not needed in JDBC if the table are well initiated with Cascade Constrain
+		//gamesService.deleteAllGamesForPlayer(playerId);
 		playerService.deletePlayer(playerId);
 	}
 	
-	
-	
-	
+		
+	////////////////////
 	/*--EXTRA REQUESTs (Developing process)--*/
+	////////////////////
 	//GET Availability confirmation for a particular Name
 	@RequestMapping(method=RequestMethod.GET, value = "/players/isNameUsed/{playerName}")
 	public ResponseEntity<String> checkNameIsAvailable(@PathVariable String playerName){
@@ -94,9 +99,7 @@ public class PlayerController {
 		}
 		
 	}
-
-	//EXTRA REQUEST FOR DEVELOPING PORPOUSE
-	//POST for creatTables
+	//POST METHOD for creatTables
 	@RequestMapping(method=RequestMethod.POST, value = "/players/createTables")
 	public void createPlayerTable() {
 		playerService.createTablePlayer();

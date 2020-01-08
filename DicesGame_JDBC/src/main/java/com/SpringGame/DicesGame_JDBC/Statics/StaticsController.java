@@ -27,18 +27,17 @@ public class StaticsController {
 	private PlayerService playerService;
 	
 	//GET General Statics for all Games
-	@RequestMapping(method=RequestMethod.GET,value = "/players/statics")//GET STATICS FROM ALL PLAYERS
+	@RequestMapping(method=RequestMethod.GET,value = "/players/stats")//GET STATISTICS FROM ALL PLAYERs 
 	public Statics getGeneralStatics() {
 		List<Games> everyGame = gamesService.getAllGames();
 		return staticsService.getStatics(everyGame);
 	}
 	
 	//GET Statics for one player by playerId
-	@RequestMapping(method=RequestMethod.GET,value = "/players/{playerId}/statics")//GET STATICS FROM ALL PLAYERS
+	@RequestMapping(method=RequestMethod.GET,value = "/players/{playerId}/stats")//GET STATISTICS FROM ALL PLAYERS
 	public Statics getStaticsForPlayerById(@PathVariable int playerId) {
-//		List<Games> allGamesForPlayer = gamesService.getAllGamesForPlayer(playerId);
-//		return staticsService.getStatics(allGamesForPlayer);
-		return null;
+		List<Games> allGamesForPlayer = gamesService.getAllGamesForPlayer(playerId);
+		return staticsService.getStatics(allGamesForPlayer);
 	}
 	
 	//GET Best Player Statics

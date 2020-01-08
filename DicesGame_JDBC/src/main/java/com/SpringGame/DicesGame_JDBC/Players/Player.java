@@ -11,17 +11,12 @@ public class Player {
 	private String playerLogPass;
 	private String playerName;
 	private String playerRegDate;
-	//Game playerGames;
-//	@Transient
-//	private float playerWinStats = (float) 0.00;
-	
-//	public Player() {
-//	}
-//	
+	@Transient
+	private float playerWinStats = (float) 0.00;
+
 	//Providing an all arguments constructor for jdbcRepository to use it
 	@PersistenceConstructor
 	public Player(int playerId, String playerLogName, String playerLogPass, String playerName, String playerRegDate) {
-//		super();
 		this.playerId = playerId;
 		this.playerLogName = playerLogName;
 		this.playerLogPass = playerLogPass;
@@ -30,9 +25,8 @@ public class Player {
 //		this.playerWinStats = playerWinStats;
 	}
 	
-	
 	public Player() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 
@@ -75,13 +69,13 @@ public class Player {
 		this.playerRegDate = playerRegDate;
 	}
 
-//	public float getAvgIsWin() {
-//		return playerWinStats;
-//	}
-//
-//	public void setAvgIsWin(float avgIsWin) {
-//		this.playerWinStats = avgIsWin;
-//	}
+	public float getAvgIsWin() {
+		return playerWinStats;
+	}
+
+	public void setAvgIsWin(float avgIsWin) {
+		this.playerWinStats = avgIsWin;
+	}
 	
 	
 	
