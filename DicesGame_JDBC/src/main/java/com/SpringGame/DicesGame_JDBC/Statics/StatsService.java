@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import com.SpringGame.DicesGame_JDBC.Games.Games;
 
 @Service
-public class StaticsService {
+public class StatsService {
 	
 	//GET STATIC FOR A PLAYER BY PlayerId
-	public Statics getStatics(List<Games> games){
+	public Stats getStatics(List<Games> games){
 
 		int qtGames = games.size();
 		int qtIsWin = 0;
@@ -21,7 +21,7 @@ public class StaticsService {
 			}
 		}
 		//System.out.println("qtGames: "+ qtGames + "qtIsWin= "+ qtIsWin);
-		Statics requestedStats = new Statics(qtGames,qtIsWin);
+		Stats requestedStats = new Stats(qtGames,qtIsWin);
 		return requestedStats;
 	}
 	

@@ -42,7 +42,7 @@ public class GamesService {
 		//return allGamesForPlayer;
 				
 		//JDBC query method
-		String queryAllGamesForPlayer = "SELECT * FROM games";
+//		String queryAllGamesForPlayer = "SELECT * FROM games";
 //		List<Map<String, Object>> gamesForPlayer = jdbcTemplate.queryForList(queryAllGamesForPlayer, new Object() = playerId, new GamesRowMapper());
 		//JDBC return
 		//Check queryForList()

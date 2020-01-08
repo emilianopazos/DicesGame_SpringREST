@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SpringGame.DicesGame_JDBC.Games.GamesService;
-import com.SpringGame.DicesGame_JDBC.Statics.StaticsService;
+import com.SpringGame.DicesGame_JDBC.Statics.StatsService;
 
 @RestController
 public class PlayerController {
@@ -24,7 +24,7 @@ public class PlayerController {
 	private GamesService gamesService;
 	
 	@Autowired
-	private StaticsService staticsService;
+	private StatsService statsService;
 	
 	////////////////////
 	/*--POST REQUESTs--*/
@@ -48,7 +48,7 @@ public class PlayerController {
 	public List<PlayerDTO> getAllPlayers() {
 		//Get All players in a List, and calculate their Stats
 		List<Player> allPlayers = playerService.getAllPlayers();
-		allPlayers.forEach(player -> player.setAvgIsWin(staticsService.getStatics(gamesService.getAllGamesForPlayer(player.getPlayerId())).getAvgIsWin()));
+		allPlayers.forEach(player -> player.setAvgIsWin(statsService.getStatics(gamesService.getAllGamesForPlayer(player.getPlayerId())).getAvgIsWin()));
 		//Create List of DTO, and populate with objectos converted to DTOs
 		List<PlayerDTO> allPlayersDTO = new ArrayList<>();
 		allPlayers.forEach(player -> allPlayersDTO.add(new PlayerDTO(player)));
@@ -60,7 +60,7 @@ public class PlayerController {
 		//Get a Player by PlayerId
 		Player requestedPlayer = playerService.getPlayerById(playerId); 
 		//Calculate Stats
-		requestedPlayer.setAvgIsWin(staticsService.getStatics(gamesService.getAllGamesForPlayer(playerId)).getAvgIsWin());
+		requestedPlayer.setAvgIsWin(statsService.getStatics(gamesService.getAllGamesForPlayer(playerId)).getAvgIsWin());
 		return new PlayerDTO(requestedPlayer);
 	}
 	

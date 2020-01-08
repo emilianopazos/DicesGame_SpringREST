@@ -1,16 +1,16 @@
 package com.SpringGame.DicesGame_JDBC.Statics;
 
-public class Statics {
+public class Stats {
 	
 	private int qtGames;
 	private int qtIsWin;
 	private float avgIsWin;
 	
-	public Statics() {
+	public Stats() {
 		
 	}
 	
-	public Statics(int qtGames, int qtIsWin) {
+	public Stats(int qtGames, int qtIsWin) {
 		super();
 		this.qtGames = qtGames;
 		this.qtIsWin = qtIsWin;

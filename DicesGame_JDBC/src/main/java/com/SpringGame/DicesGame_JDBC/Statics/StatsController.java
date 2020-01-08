@@ -15,10 +15,10 @@ import com.SpringGame.DicesGame_JDBC.Players.PlayerDTO;
 import com.SpringGame.DicesGame_JDBC.Players.PlayerService;
 
 @RestController
-public class StaticsController {
+public class StatsController {
 	
 	@Autowired
-	private StaticsService staticsService;
+	private StatsService statsService;
 
 	@Autowired
 	private GamesService gamesService;
@@ -28,16 +28,16 @@ public class StaticsController {
 	
 	//GET General Statics for all Games
 	@RequestMapping(method=RequestMethod.GET,value = "/players/stats")//GET STATISTICS FROM ALL PLAYERs 
-	public Statics getGeneralStatics() {
+	public Stats getGeneralStatics() {
 		List<Games> everyGame = gamesService.getAllGames();
-		return staticsService.getStatics(everyGame);
+		return statsService.getStatics(everyGame);
 	}
 	
 	//GET Statics for one player by playerId
 	@RequestMapping(method=RequestMethod.GET,value = "/players/{playerId}/stats")//GET STATISTICS FROM ALL PLAYERS
-	public Statics getStaticsForPlayerById(@PathVariable int playerId) {
+	public Stats getStaticsForPlayerById(@PathVariable int playerId) {
 		List<Games> allGamesForPlayer = gamesService.getAllGamesForPlayer(playerId);
-		return staticsService.getStatics(allGamesForPlayer);
+		return statsService.getStatics(allGamesForPlayer);
 	}
 	
 	//GET Best Player Statics
@@ -45,9 +45,8 @@ public class StaticsController {
 	public PlayerDTO getBestPlayerStatics() {
 		//Get all Games
 		List<Player> allPlayers = playerService.getAllPlayers();
-//		allPlayers.forEach(player -> player.setAvgIsWin(staticsService.getStatics(gamesService.getAllGamesForPlayer(player.getPlayerId())).getAvgIsWin()));
-//		allPlayers.sort(Comparator.comparing(Player::getAvgIsWin));//Tested outside App
-				
+		allPlayers.forEach(player -> player.setAvgIsWin(statsService.getStatics(gamesService.getAllGamesForPlayer(player.getPlayerId())).getAvgIsWin()));
+		allPlayers.sort(Comparator.comparing(Player::getAvgIsWin));//Tested outside App
 		return new PlayerDTO(allPlayers.get(allPlayers.size()-1));
 	}
 	
@@ -56,9 +55,8 @@ public class StaticsController {
 	public PlayerDTO getWorstPlayerStatics() {
 		//Get all Games
 		List<Player> allPlayers = playerService.getAllPlayers();
-//		allPlayers.forEach(player -> player.setAvgIsWin(staticsService.getStatics(gamesService.getAllGamesForPlayer(player.getPlayerId())).getAvgIsWin()));
-//		allPlayers.sort(Comparator.comparing(Player::getAvgIsWin));//Tested outside App
-				
+		allPlayers.forEach(player -> player.setAvgIsWin(statsService.getStatics(gamesService.getAllGamesForPlayer(player.getPlayerId())).getAvgIsWin()));
+		allPlayers.sort(Comparator.comparing(Player::getAvgIsWin));//Tested outside App
 		return new PlayerDTO(allPlayers.get(0));
 	}
 	
